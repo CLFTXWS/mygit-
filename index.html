@@ -10,4 +10,26 @@
     <h1>hello git</h1>
     <p>我是一个字段，这个字段是p标签</p>
 </body>
+<script type="text/javascript">
+    function create(fn,...arg){
+        //先创建一个空对象
+        let obj = {};
+        //让这个空对象的原型指向传递的原型；
+        obj.__proto__ = fn.prototype
+        //修改this的指向
+        let result = fn.apply(obj,arg)
+        //若是result没有其他对象的值了就返回obj对象
+        return result instanceof Object ? result : obj
+    }
+    function Test(name,age){
+        this.name = name;
+        this.age = age
+    }
+    Test.prototype.myName = function(){
+        console.log(this.name)
+    }
+
+    let a = create(Test,"小磊",22)
+    console.log(a.name)
+</script>
 </html>
